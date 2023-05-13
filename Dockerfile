@@ -23,6 +23,8 @@ RUN pip install --upgrade pip
 
 FROM base as py-dependencies
 
+ENV CARGO_NET_GIT_FETCH_WITH_CLI true
+
 # install system dependencies
 RUN apt-get update && \
 	apt-get install -y --no-install-recommends \
