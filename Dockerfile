@@ -52,8 +52,7 @@ ENV PATH="$APP_VIRTUALENV/bin:$PATH"
 
 # install python dependencies
 COPY requirements.txt .
-SHELL ["/bin/bash", "-c", "source $HOME/.cargo/env"]
-RUN pip install -r requirements.txt --no-cache-dir
+RUN /bin/bash -c 'source $HOME/.cargo/env && pip install -r requirements.txt --no-cache-dir'
 
 #######################################
 # Build image for runtime
