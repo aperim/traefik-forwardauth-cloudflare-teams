@@ -33,9 +33,7 @@ RUN apt-get update && \
 		libssl-dev \
 		libffi-dev \
 		python3-dev \
-		cargo \
 		pkg-config && \
-	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && \
 	apt-get autoremove -y && \
 	apt-get clean && \
 	rm -rf /var/lib/apt/lists/*
@@ -45,6 +43,9 @@ RUN python -m venv $APP_VIRTUALENV
 
 # use the virtualenv
 ENV PATH="$APP_VIRTUALENV/bin:$PATH"
+
+RUN pip install maturin && \
+	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
 # install python dependencies
 COPY requirements.txt .
