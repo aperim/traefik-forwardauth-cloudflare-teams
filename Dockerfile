@@ -42,7 +42,8 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && \
 	pip install maturin --user
 
 # create new virtualenv
-RUN python -m venv $APP_VIRTUALENV
+RUN python -m venv $APP_VIRTUALENV && \
+	/opt/venv/bin/python -m pip install --upgrade pip
 
 # use the virtualenv
 ENV PATH="$APP_VIRTUALENV/bin:$PATH"
