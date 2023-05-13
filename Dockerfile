@@ -25,7 +25,14 @@ FROM base as py-dependencies
 
 # install system dependencies
 RUN apt-get update && \
-	apt-get install -y --no-install-recommends gcc libffi-dev && \
+	apt-get install -y --no-install-recommends \
+		curl \
+		gcc \
+		libssl-dev \
+		libffi-dev \
+		python3-dev \
+		cargo \
+		pkg-config && \
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh && \
 	apt-get autoremove -y && \
 	apt-get clean && \
