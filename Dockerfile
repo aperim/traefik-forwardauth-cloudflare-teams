@@ -45,7 +45,7 @@ RUN pip install maturin --user
 
 # create new virtualenv
 RUN python -m venv $APP_VIRTUALENV && \
-	/opt/venv/bin/python -m pip install --upgrade pip
+	${APP_VIRTUALENV}/bin/python -m pip install --upgrade pip
 
 # use the virtualenv
 ENV PATH="$APP_VIRTUALENV/bin:$PATH"
