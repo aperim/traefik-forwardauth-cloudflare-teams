@@ -46,7 +46,7 @@ RUN python -m venv $APP_VIRTUALENV && \
 	/opt/venv/bin/python -m pip install --upgrade pip
 
 # use the virtualenv
-ENV PATH="$APP_VIRTUALENV/bin:$PATH"
+ENV PATH="$APP_VIRTUALENV/bin:$HOME/.cargo/bin:$PATH"
 
 # install python dependencies
 COPY requirements.txt .
