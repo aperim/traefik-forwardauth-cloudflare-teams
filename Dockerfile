@@ -33,7 +33,7 @@ RUN apt-get update && \
 		python3-dev \
 		cargo \
 		pkg-config && \
-	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh && \
+	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && \
 	apt-get autoremove -y && \
 	apt-get clean && \
 	rm -rf /var/lib/apt/lists/*
