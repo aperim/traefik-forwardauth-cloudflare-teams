@@ -24,6 +24,7 @@ RUN pip install --upgrade pip
 FROM base as py-dependencies
 
 ENV CARGO_NET_GIT_FETCH_WITH_CLI true
+ENV CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse
 
 # install system dependencies
 RUN apt-get update && \
@@ -38,18 +39,20 @@ RUN apt-get update && \
 	apt-get clean && \
 	rm -rf /var/lib/apt/lists/*
 
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && \
-	pip install maturin --user
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+ENV PATH="~/.cargo/bin:$PATH"
+RUN pip install maturin --user
 
 # create new virtualenv
 RUN python -m venv $APP_VIRTUALENV && \
 	/opt/venv/bin/python -m pip install --upgrade pip
 
 # use the virtualenv
-ENV PATH="$APP_VIRTUALENV/bin:~/.cargo/bin:$PATH"
+ENV PATH="$APP_VIRTUALENV/bin:$PATH"
 
 # install python dependencies
 COPY requirements.txt .
+SHELL ["/bin/bash", "-c", "source $HOME/.cargo/env"]
 RUN pip install -r requirements.txt --no-cache-dir
 
 #######################################
