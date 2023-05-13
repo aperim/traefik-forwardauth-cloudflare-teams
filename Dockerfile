@@ -30,8 +30,7 @@ RUN apt-get update && \
 	apt-get clean && \
 	rm -rf /var/lib/apt/lists/*
 
-RUN --security=insecure \
-	mkdir -p /root/.cargo && \
+RUN mkdir -p /root/.cargo && \
 	chmod 777 /root/.cargo && \
 	mount -t tmpfs none /root/.cargo && \
 	pip3 install --no-cache-dir cryptography
