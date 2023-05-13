@@ -25,7 +25,7 @@ FROM base as py-dependencies
 
 # install system dependencies
 RUN apt-get update && \
-	apt-get install -y --no-install-recommends gcc rustc && \
+	apt-get install -y --no-install-recommends gcc rustc libffi-dev && \
 	apt-get autoremove -y && \
 	apt-get clean && \
 	rm -rf /var/lib/apt/lists/*
