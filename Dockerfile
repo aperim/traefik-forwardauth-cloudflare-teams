@@ -24,7 +24,6 @@ RUN pip install --upgrade pip
 FROM base as py-dependencies
 
 ENV CARGO_NET_GIT_FETCH_WITH_CLI true
-ENV PYTHON_CONFIGURE_OPTS="--enable-shared"
 
 # install system dependencies
 RUN apt-get update && \
@@ -39,14 +38,14 @@ RUN apt-get update && \
 	apt-get clean && \
 	rm -rf /var/lib/apt/lists/*
 
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && \
+	pip install maturin --user
+
 # create new virtualenv
 RUN python -m venv $APP_VIRTUALENV
 
 # use the virtualenv
 ENV PATH="$APP_VIRTUALENV/bin:$PATH"
-
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && \
-	pip install maturin --user
 
 # install python dependencies
 COPY requirements.txt .
