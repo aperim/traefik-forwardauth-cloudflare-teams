@@ -15,7 +15,9 @@ def auth(audience):
         abort(Response('Token is missing.', 401))
 
     try:
-        user = decode_token(jwt, audience)['email']
+        payload = decode_token(jwt, audience)
+        # Use email for user logins, common_name for service tokens
+        user = payload.get('email') or payload.get('common_name', 'unknown')
         return Response('Verified.', 200, {'X-Auth-User': user})
     except ExpiredSignatureError:
         abort(Response('Token is expired.', 401))

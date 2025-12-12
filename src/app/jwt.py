@@ -6,8 +6,8 @@ CF_TEAMS_DOMAIN = getenv('CF_TEAMS_DOMAIN')
 CF_ACCESS_CERTS_URL = f'https://{CF_TEAMS_DOMAIN}/cdn-cgi/access/certs'
 
 JWT_DECODE_OPTIONS = {
-    # Require expiry, issued-at, and email
-    "require": ["exp", "iat", "email"],
+    # Require expiry and issued-at (email not required for service tokens)
+    "require": ["exp", "iat"],
 }
 
 def decode_token(jwt, audience):
