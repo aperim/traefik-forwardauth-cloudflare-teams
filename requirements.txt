@@ -13,7 +13,7 @@ packaging==24.1
 pycparser==2.22
 PyJWT==2.9.0
 python-dotenv==1.0.1
-setuptools==69.0.3
+setuptools==70.0.0
 smmap==5.0.1
 Werkzeug==3.0.4
 wheel==0.44.0
